@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Montserrat:wght@500&display=swap');
+
+@font-face {
+    font-family: "UltraFont";
+    src: url(https://cdn.discordapp.com/attachments/932530461970956310/940262471816593488/Louis_George_Cafe.ttf);
+}
+  
+
+body { 
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    /* background: #00ADFA; */
+    /* background-size: 90%; */
+}
+
+/* INFO PLAYER AND DATA */
+
+[class="players"] {
+    position: absolute;
+    right: 1.5vw;
+    top: 8vw;
+    color: white;
+    text-align: center;
+}
+
+.datap span {
+    font-size: .7vw;
+    /* text-shadow: 0px 1px 1px rgb(0, 0, 0); */
+    font-family: "UltraFont";
+}
+  
+.datap i {
+    
+    font-size: .8vw;
+    color: white;
+    background: linear-gradient(83deg, rgba(0,0,0,0) 0%, rgba(73, 73, 73, 0.486) 100%);
+    border-radius: .2vw;
+    border-right: .3vw #4a36ff solid;
+    padding: .2vw;
+}
+  
+.datap {
+    padding: .2vw;
+}
+
+
+/* STATUS HERE */
+
+.ldBar path.mainline {
+    stroke-width: 6;
+    stroke: #D470FF;
+    
+}
+.ldBar path.baseline {
+    stroke-width: 6;
+    stroke: #6b6b6b80;
+}
+
+#oxyB path.mainline {
+    stroke: #a17600; 
+    
+}
+
+#runB path.mainline {
+    stroke: #fbff07; 
+}
+
+#vestB path.mainline {
+    stroke: #00127a;
+}
+
+#waterB path.mainline {
+    stroke: #5d60ff;
+}
+
+#burgerB path.mainline {
+    stroke: #13a000;
+}
+
+#vidaiconB path.mainline {
+    stroke: #ff0707;
+}
+
+[id="oxy"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: .3vw;
+    bottom: 33.7vw;
+}
+
+[id="run"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: .3vw;
+    bottom: 30.7vw;
+}
+
+[id="vest"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: .3vw;
+    bottom: 27.7vw;
+}
+
+[id="water"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: .3vw;
+    bottom: 24.7vw;
+}
+
+[id="burger"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: .3vw;
+    bottom: 21.7vw;
+}
+
+[id="vidaicon"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: .3vw;
+    bottom: 18.7vw;
+}
+
+[class="oxyjs"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: 7vw;
+    bottom: 33vw;
+    
+    
+}
+
+[class="runjs"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: 7vw;
+    bottom: 30vw;
+    
+}
+
+[class="vestjs"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: 7vw;
+    bottom: 27vw;
+    
+}
+
+[class="waterjs"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: 7vw;
+    bottom: 24vw;
+    
+}
+
+[class="burgerjs"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: 7vw;
+    bottom: 21vw;
+    
+}
+
+[class="vidajs"] {
+
+    position: absolute;
+    color: white;
+    font-size: .8vw;
+    text-shadow: 0px 1px 1px rgb(0, 0, 0);
+    left: 7vw;
+    bottom: 18vw;
+    
+}
+
+/* MICRO*/
+
+.microfono img {
+
+    position: absolute;
+    width: 2vw;
+    height: 2vw;
+    bottom: 2vw;
+    right: 2vw;
+}
+  
+/* STREET */
+
+.calle img {
+
+    position: absolute;
+    width: 2vw;
+    height: 2vw;
+    bottom: 4.5vw;
+    left: 18vw;
+}
+
+.calle h1 {
+
+    position: absolute;
+    bottom: 2.2vw;
+    left: 17vw;
+    font-size: 1vw;
+    color: white;
+}
+
+.calle h2 {
+
+    position: absolute;
+    bottom: 1.3vw;
+    left: 17vw;
+    font-size: .8vw;
+    color: rgba(255, 255, 255, 0.644);
+}
+
+/* CAR HUD */
+
+#carhudjs path.mainline {
+    stroke: #4a36ff;
+    stroke-width: 8;
+    border-radius: 5vw;
+}
+  
+#carhudjs path.baseline {
+    
+    stroke: #8a8a8a81;
+    border-radius: 5vw;
+    stroke-width: 8;
+}
+
+.carHUD h1 {
+
+    position: absolute;
+    bottom: 4vw;
+    right: 48vw;
+    font-size: 3vw;
+    color: white;
+    text-shadow: 0px 1px 1px #8a8a8a;
+}
+  
+.carHUD h2 {
+
+    position: absolute;
+    bottom: 4.7vw;
+    right: 48.2vw;
+    font-size: .8vw;
+    color: rgb(168, 164, 164);
+}
+  
+.carHUD img {
+
+    position: absolute;
+    width: 1.5vw;
+    height: 1.5vw;
+    bottom: 6vw;
+    right: 42.8vw;
+}
+  
+.carHUD h3 {
+
+    position: absolute;
+    bottom: 4.7vw;
+    right: 42.8vw;
+    font-size: .6vw;
+    color: rgb(255, 255, 255);
+    /* text-shadow: 0px 1px 1px rgb(0, 0, 0); */
+}
+
+[class="beltjs"] {
+
+
+    width: 2vw;
+    height: 2vw;
+    position: absolute;
+    right: 53vw;
+    bottom: 3vw;
+}
+
+[class="motorON"] {
+
+    width: 2vw;
+    height: 2vw;
+    position: absolute;
+    right: 46vw;
+    bottom: 3vw;
+}
+
+[id="EngineBad"] {
+
+    position: absolute;
+    right: 48.2vw;
+    bottom: 3.5vw;
+    font-size: 1vw;
+    color: white;
+}
+
+[class="motorjs"] {
+
+    font-size: 1.2vw;
+    margin-left: .2vw;
+}
+
+[class="ammo"] {
+    position: absolute;
+    right: 1vw;
+    bottom: 5vw;
+    background: rgb(0,0,0);
+    border-radius: 8px;
+    border-right: .3vw #4a36ff solid;
+    background: linear-gradient(83deg, rgba(0,0,0,0) 0%, rgba(73, 73, 73, 0.486) 100%);
+    padding-left: 3vw;
+    padding-right: 1vw;
+    height: 4vw;
+    width: 1vw;
+}
+  
+.ammo h1 {
+    font-size: 1vw;
+    color: white;
+    position: fixed;
+    right:2vw;
+    bottom: 4.8vw;
+    font-size: .8vw;
+    /* text-shadow: 0px 1px 1px rgb(0, 0, 0); */
+    font-family: "UltraFont";
+    
+}
+  
+.ammo img {
+    width: 2vw;
+    height: 2vw;
+    position: absolute;
+    right: 1vw;
+    bottom: 1.5vw;
+}

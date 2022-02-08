@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="author" content="Clau">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ultra HUD</title>
+        
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="dist/loading-bar.css">
+        <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" rel="stylesheet" type="text/css" />
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="app.js"></script>
+        <script src="dist/loading-bar.js"></script>
+
+    </head>
+
+    <body>
+
+        <div class="UltraHud">
+            <div class="logoinfo">
+                <h1></h1>
+                <img src="https://i.imgur.com/V1iFcyE.png" style="position: absolute; top: 1vw; right: 1vw; width: 6vw; height: 6vw;"/>
+            </div>    
+
+            <div class="players">
+                <div class="datap pid">
+                  <i class="fas fa-user"><span class="pedID"> ID: 100</span></i>
+                </div>
+                <div class="datap pconnect">
+                  <i class="fas fa-user-friends"><span class="pedOline"> 100/200</span></i> 
+                </div>
+            </div>
+        
+            <div class="status">
+
+                <div id="oxyB" class="ldBar" data-value="55" style="color: transparent; position: absolute; width: 8.3vw; height: 2.3vw; bottom: 31.8vw; left: .8vw;"></div>
+                <i id="oxy" class="fas fa-lungs" style="color: white; margin-left: 1vw; position: absolute;"></i>
+                <h1 class="oxyjs">55%</h1>
+                
+
+                <div id="runB" class="ldBar" data-value="45" style="color: transparent; position: absolute; width: 8.3vw; height: 2.3vw; bottom: 28.8vw; left: .8vw;"></div>
+                <i id="run" class="fas fa-running" style="color: white; margin-left: 1vw; position: absolute;"></i>
+                <h1 class="runjs">45%</h1>
+
+                <div id="vestB" class="ldBar" data-value="0" style="color: transparent; position: absolute; width: 8.3vw; height: 2.3vw; bottom: 25.8vw; left: .8vw;"></div>
+                <i id="vest" class="fas fa-vest" style="color: white; margin-left: 1vw;"></i>
+                <h1 class="vestjs">0%</h1>
+
+
+                <div id="waterB" class="ldBar" data-value="100" style="color: transparent; position: absolute; width: 8.3vw; height: 2.3vw; bottom: 22.8vw; left: .8vw;"></div>
+                <i id="water" class="fas fa-glass" style="color: white; margin-left: 1vw;"></i>
+                <h1 class="waterjs">100%</h1>
+
+ 
+                <div id="burgerB" class="ldBar" data-value="90" style="color: transparent; position: absolute; width: 8.3vw; height: 2.3vw; bottom: 19.8vw; left: .8vw;"></div>
+                <i id="burger" class="fas fa-hamburger" style="color: white; margin-left: 1vw;"></i>
+                <h1 class="burgerjs">90%</h1>
+
+
+                <div id="vidaiconB" class="ldBar" data-value="25" style="color: transparent; position: absolute; width: 8.3vw; height: 2.3vw; bottom: 16.8vw; left: .8vw;"></div>
+                <i id="vidaicon" class="fas fa-heartbeat" style="color: white; margin-left: 1vw;"></i>
+                <h1 class="vidajs">25%</h1>
+
+            </div>
+
+            <div class="microfono">  
+                <img class="voicejs" src="https://cdn.discordapp.com/attachments/932530461970956310/940126046404100127/Micro1.png" alt="">
+            </div>
+
+            <div class="calle">
+                <img src="https://i.imgur.com/cjQUKFf.png" alt="">
+                <h1 class="callejs">Los Santos</h1>
+                <h2>California</h2>
+            </div>
+
+            <div class="carHUD">
+                <h1 class="hideHUD" style="color: rgba(0, 0, 0, 0);">000</h1>
+                <h1 class="speedjs">200</h1>
+                <h2>KM/H</h2>
+                <img class="gasjs" src="https://cdn.discordapp.com/attachments/932530461970956310/940143954853265488/gasolina.png" alt="">
+                <h3 class="gasolinajs">100%</h3>
+                <div id="carhudjs" data-preset="fan" class="ldBar" data-value="60" style="transform: scaleX(-1) scaleY(1); position: absolute; color: transparent; height: 12vw; width: 12vw; right: 44.5vw; bottom: 2vw;"></div>
+            </div>
+
+            <div class="CarIMG">
+                <img class="beltjs" src="https://cdn.discordapp.com/attachments/932530461970956310/940141782774190130/belt.png" alt="">
+                <i id="EngineBad" class="fas fa-cogs"><span class="motorjs">100%</span></i>
+                <img class="motorON" src="https://cdn.discordapp.com/attachments/932530461970956310/940141781742395432/motor.png" alt="">
+            </div>
+            
+            <div class="ammo">
+                <img src="https://cdn.discordapp.com/attachments/932530461970956310/940257655623127071/Untitled-1-09.png" alt="">
+                <h1 class="ammojs"><span style="color:#ffffff">100/100</span></h1>
+            </div>
+
+        </div>
+
+    </body>
+
+    
+
+</html>
