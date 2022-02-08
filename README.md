@@ -34,5 +34,5 @@ DISCORD: https://discord.io/ultracode
 
 PREVIEW: https://youtu.be/FJt2ByLPDGA
 
-Thanks to @NearTv who helped me a lot to learn.
-Gracias a Rodec, que me ayudó bastante en aprender.. @NearTv
+Thanks to Roderic who helped me a lot to learn.
+Gracias a Roderic, que me ayudó bastante en aprender..
