@@ -32,6 +32,6 @@ El recurso consume un poco, es posible mejorarlo mas. pero estoy en proceso de l
 
 DISCORD: https://discord.io/ultracode
 
-PREVIEW: Fivem HUD (FREE) Ultra HUD ESX - YouTube
+PREVIEW: https://youtu.be/FJt2ByLPDGA
 
 Gracias a Rodec, que me ayudó bastante en aprender.. @NearTv
