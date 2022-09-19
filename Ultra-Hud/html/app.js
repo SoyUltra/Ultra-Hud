@@ -65,7 +65,8 @@ window.addEventListener("message", function(event) {
         // Status
         case "updateStatus":
             $('.UltraHud').show()
-            $('.pedOline').html(' '+v.pall+'/200')
+            $('.logoprueba').attr('src', v.logo)
+            $('.pedOline').html(' '+v.pall+'/'+v.maxPlayers+'');
             $('.pedID').html(' ID: '+v.pid)
             vida.set(v.health, true)
             $('.vidajs').html(v.health+'%')
@@ -79,16 +80,14 @@ window.addEventListener("message", function(event) {
             $('.waterjs').html(Math.round(v.thirst)+'%')
             co2.set(v.oxigen, true)
             $('.oxyjs').html(Math.round(v.oxigen)+'%')
-            if (v.voice == true) {
-                $('.voicejs').attr("src","https://cdn.discordapp.com/attachments/932530461970956310/940126045795930192/Micro2.png")
-            } else if(v.voice == false) {
-                $('.voicejs').attr("src","https://cdn.discordapp.com/attachments/932530461970956310/940126046404100127/Micro1.png")
-            }
         break;
 
-
+        case "ShowAllHud":
+            $('.UltraHud').show(300)
+        break;
+        
         case "hideAllHud":
-            $('.UltraHud').hide()
+            $('.UltraHud').hide(300)
         break;
 
         case  "updateAmmo":
@@ -102,6 +101,14 @@ window.addEventListener("message", function(event) {
         break;
         
     }
+        if (event.data.talking == true) 
+         {
+            $('.voicejs').attr("src","https://cdn.discordapp.com/attachments/932530461970956310/940126045795930192/Micro2.png")
+         }
+         else if (event.data.talking == false)
+         {
+            $('.voicejs').attr("src","https://cdn.discordapp.com/attachments/932530461970956310/940126046404100127/Micro1.png")
+         }
     
 });
 

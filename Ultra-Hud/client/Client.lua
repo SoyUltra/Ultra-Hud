@@ -1,44 +1,66 @@
--- ________   ______   __    __ 
--- /        | /      \ /  |  /  |
--- $$$$$$$$/ /$$$$$$  |$$ |  $$ |
--- $$ |__    $$ \__$$/ $$  \/$$/ 
--- $$    |   $$      \  $$  $$<  
--- $$$$$/     $$$$$$  |  $$$$  \ 
--- $$ |_____ /  \__$$ | $$ /$$  |
--- $$       |$$    $$/ $$ |  $$ |
--- $$$$$$$$/  $$$$$$/  $$/   $$/ 
+--------------------------------------------------------QBCORE--------------------------------------
 
-ESX                     = nil
+if Config.Framework == "QBCORE" then
 
-Citizen.CreateThread(function()
-    while ESX == nil do
-        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-        Citizen.Wait(0)
-    end
-end)
+    QBCore = exports["qb-core"]:GetCoreObject()
 
-    AddEventHandler('playerSpawned', function()   
-        Citizen.CreateThread(function ()
-            while true do 
-                if not IsPauseMenuActive() then 
+    local PlayerData = QBCore.Functions.GetPlayerData()
+    local hunger = nil
+    local thirst = nil
+    local ped, health, armor, pid, Player, playerId , playersCount, stamina
+
+    RegisterNetEvent('hud:client:UpdateNeeds')
+    AddEventHandler('hud:client:UpdateNeeds', function(newHunger, newThirst)
+        hunger = newHunger
+        thirst = newThirst
+    end)
+
+    RegisterNetEvent("QBCore:Client:OnPlayerUnload", function()
+        PlayerData = {}
+    end)
+
+    RegisterNetEvent("QBCore:Client:OnPlayerLoaded")
+    AddEventHandler("QBCore:Client:OnPlayerLoaded", function ()
+        Wait(100)
+        SendNUIMessage({ action = 'ShowAllHud' })
+    end)
+
+    AddEventHandler('onResourceStart', function(resourceName)
+        if (GetCurrentResourceName() == resourceName) then
+        Wait(100)
+            SendNUIMessage({ action = 'ShowAllHud' })
+        end
+    end)
+
+    Citizen.CreateThread(function ()
+        while true do 
+            Wait(500)
+            if LocalPlayer.state.isLoggedIn then 
+
+                QBCore.Functions.GetPlayerData(function(PlayerData)
                     ped = PlayerPedId()
                     health = GetEntityHealth(ped)
                     armor = GetPedArmour(ped)
+                    Player = QBCore.Functions.GetPlayerData()
+                    playerId = PlayerId() 
                     pid = GetPlayerServerId(PlayerId())
+                    playersCount = 1
+                    stamina = 100 - GetPlayerSprintStaminaRemaining(playerId)
+                    
                     SendNUIMessage({
                         action = 'updateStatus',
+                        pid = pid,
                         health = health - 100,
                         armor = armor,
-                        pid = pid,
-                        voice = NetworkIsPlayerTalking(PlayerId()),
-                        stamina = 100 - GetPlayerSprintStaminaRemaining(PlayerId()),
-                        oxigen = GetPlayerUnderwaterTimeRemaining(PlayerId())*10,
-                        hunger = food,
-                        thirst = water,
+                        hunger = hunger,
+                        thirst = thirst,
+                        stamina = stamina,
+                        logo = Config.Logo,
                         pall = playersCount,
-                        stress = stress
+                        maxPlayers = Config.MaxPlayers,
+                        oxigen = GetPlayerUnderwaterTimeRemaining(PlayerId())*10
                     })
-                    
+
                     if IsPedArmed(ped, 7) then
                         local weapon = GetSelectedPedWeapon(ped)
                         local ammoTotal = GetAmmoInPedWeapon(ped,weapon)
@@ -54,64 +76,130 @@ end)
                             action = 'hideAmmo',
                         })
                     end
-                else
-                    SendNUIMessage({
-                        action = 'hideAllHud',
-                    })
-                end
-                Wait(500)
-            end
-        end)
-        
-    
-        Citizen.CreateThread(function()
-            while true do
-                Citizen.Wait(Config.StatusUpdateInterval)
-                GetStatus(function(data)
-                        food = data[1]
-                        water = data[2]
-                        stress = data[3]
+                    
                 end)
+            else
+                SendNUIMessage({action = 'hideAllHud'})
             end
-        end)
+            Wait(1000)
+        end
     end)
 
-         
+end
+--------------------------------------------------------END QBCORE----------------------------------
+--------------------------------------------------------ESX-----------------------------------------
+
+if Config.Framework == "ESX" then
+
+    ESX = nil
+
+    local PlayerData = nil
+    local playersCount = 1
+
+    Citizen.CreateThread(function()
+        while ESX == nil do
+            TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+            Citizen.Wait(4000)
+        end
+    end)
+
+    AddEventHandler('playerSpawned', function()
+        Wait(100)
+        SendNUIMessage({ action = 'ShowAllHud' })
+    end)
+
+    AddEventHandler('onResourceStart', function(resourceName)
+        if (GetCurrentResourceName() == resourceName) then
+        Wait(100)
+            SendNUIMessage({ action = 'ShowAllHud' })
+        end
+    end)
+
+    Citizen.CreateThread(function()
+        while true do
+        Wait(4000)
+            TriggerEvent('esx_status:getStatus', 'hunger', function(hunger)
+                TriggerEvent('esx_status:getStatus', 'thirst', function(thirst)
+                    food = hunger.getPercent()
+                    water = thirst.getPercent()
+                end)
+            end)
+        end
+    end)
+
+    Citizen.CreateThread(function() 
     
---   ______    ______   ________  ______  __     __  ________        _______   __         ______   __      __  ________  _______  
---  /      \  /      \ /        |/      |/  |   /  |/        |      /       \ /  |       /      \ /  \    /  |/        |/       \ 
--- /$$$$$$  |/$$$$$$  |$$$$$$$$/ $$$$$$/ $$ |   $$ |$$$$$$$$/       $$$$$$$  |$$ |      /$$$$$$  |$$  \  /$$/ $$$$$$$$/ $$$$$$$  |
--- $$ |__$$ |$$ |  $$/    $$ |     $$ |  $$ |   $$ |$$ |__          $$ |__$$ |$$ |      $$ |__$$ | $$  \/$$/  $$ |__    $$ |__$$ |
--- $$    $$ |$$ |         $$ |     $$ |  $$  \ /$$/ $$    |         $$    $$/ $$ |      $$    $$ |  $$  $$/   $$    |   $$    $$< 
--- $$$$$$$$ |$$ |   __    $$ |     $$ |   $$  /$$/  $$$$$/          $$$$$$$/  $$ |      $$$$$$$$ |   $$$$/    $$$$$/    $$$$$$$  |
--- $$ |  $$ |$$ \__/  |   $$ |    _$$ |_   $$ $$/   $$ |_____       $$ |      $$ |_____ $$ |  $$ |    $$ |    $$ |_____ $$ |  $$ |
--- $$ |  $$ |$$    $$/    $$ |   / $$   |   $$$/    $$       |      $$ |      $$       |$$ |  $$ |    $$ |    $$       |$$ |  $$ |
--- $$/   $$/  $$$$$$/     $$/    $$$$$$/     $/     $$$$$$$$/       $$/       $$$$$$$$/ $$/   $$/     $$/     $$$$$$$$/ $$/   $$/ 
-                                                                                                                               
-                                                                                                                               
-RegisterNetEvent('Ultra-Hud:GetActivePlayers')
-AddEventHandler('Ultra-Hud:GetActivePlayers', function(players)
-    playersCount = players
-end)
+        ESX.PlayerData = ESX.GetPlayerData()
+            while true do
+            
+                local ped = PlayerPedId()
+                local health = GetEntityHealth(ped)
+                local armor = GetPedArmour(ped)
+                local pid = GetPlayerServerId(PlayerId())
+                local player = PlayerId()
+                local armor = GetPedArmour(ped)
+                local stamina = 100 - GetPlayerSprintStaminaRemaining(player)
+                
+                SendNUIMessage({
+                    action = 'updateStatus',
+                    health = health - 100,
+                    armor = armor,
+                    pid = pid,
+                    hunger = food,
+                    thirst = water,
+                    stamina = stamina,
+                    oxigen = GetPlayerUnderwaterTimeRemaining(PlayerId())*10,
+                    logo = Config.Logo,
+                    maxPlayers = Config.MaxPlayers,
+                    pall = playersCount,
+                })
+                
+                if IsPedArmed(ped, 7) then
+                    local weapon = GetSelectedPedWeapon(ped)
+                    local ammoTotal = GetAmmoInPedWeapon(ped,weapon)
+                    local bool,ammoClip = GetAmmoInClip(ped,weapon)
+                    local ammoRemaining = math.floor(ammoTotal - ammoClip)
+                    SendNUIMessage({
+                        action = 'updateAmmo',
+                        ammo = ammoClip,
+                        ammohand = ammoRemaining
+                    })
+                else
+                    SendNUIMessage({
+                        action = 'hideAmmo',
+                    })
+                end
+                Wait(1000)
+                if IsEntityDead(ped) then
+                    health = 0
+                else
+                    health = GetEntityHealth(ped) - 100
+                end
+            end
+        end)
+                                                                                                                                                                                                                                           
+    RegisterNetEvent('Ultra-Hud:GetActivePlayers')
+    AddEventHandler('Ultra-Hud:GetActivePlayers', function(players)
+        playersCount = players
+    end)
 
--- __     __  ________  __    __  ______   ______   __        ________ 
--- /  |   /  |/        |/  |  /  |/      | /      \ /  |      /        |
--- $$ |   $$ |$$$$$$$$/ $$ |  $$ |$$$$$$/ /$$$$$$  |$$ |      $$$$$$$$/ 
--- $$ |   $$ |$$ |__    $$ |__$$ |  $$ |  $$ |  $$/ $$ |      $$ |__    
--- $$  \ /$$/ $$    |   $$    $$ |  $$ |  $$ |      $$ |      $$    |   
---  $$  /$$/  $$$$$/    $$$$$$$$ |  $$ |  $$ |   __ $$ |      $$$$$/    
---   $$ $$/   $$ |_____ $$ |  $$ | _$$ |_ $$ \__/  |$$ |_____ $$ |_____ 
---    $$$/    $$       |$$ |  $$ |/ $$   |$$    $$/ $$       |$$       |
---     $/     $$$$$$$$/ $$/   $$/ $$$$$$/  $$$$$$/  $$$$$$$$/ $$$$$$$$/ 
-                                                                     
-                                                
+end
+-------------------------------------------------------- END ESX-----------------------------------------
 
+    -- /  |   /  |/        |/  |  /  |/      | /      \ /  |      /        |
+    -- $$ |   $$ |$$$$$$$$/ $$ |  $$ |$$$$$$/ /$$$$$$  |$$ |      $$$$$$$$/ 
+    -- $$ |   $$ |$$ |__    $$ |__$$ |  $$ |  $$ |  $$/ $$ |      $$ |__    
+    -- $$  \ /$$/ $$    |   $$    $$ |  $$ |  $$ |      $$ |      $$    |   
+    --  $$  /$$/  $$$$$/    $$$$$$$$ |  $$ |  $$ |   __ $$ |      $$$$$/    
+    --   $$ $$/   $$ |_____ $$ |  $$ | _$$ |_ $$ \__/  |$$ |_____ $$ |_____ 
+    --    $$$/    $$       |$$ |  $$ |/ $$   |$$    $$/ $$       |$$       |
+    --     $/     $$$$$$$$/ $$/   $$/ $$$$$$/  $$$$$$/  $$$$$$$$/ $$$$$$$$/ 
+                                                                        
+                                                    
 local cinturon = false 
 local bateria = true
 
-
 function Cinturon(ped)
-
     while true do 
         if cinturon then 
             DisableControlAction(0, 75, true)  -- Disable exit vehicle when stop
@@ -122,7 +210,6 @@ function Cinturon(ped)
         Citizen.Wait(0)
     end
 end
-
 
 Citizen.CreateThread(function()
     while true do 
@@ -168,7 +255,6 @@ Citizen.CreateThread(function()
 end)
 
 
-
 function EngineControl()
     local veh = GetVehiclePedIsIn(PlayerPedId(), false)
     if veh ~= nil and veh ~= 0 and GetPedInVehicleSeat(veh, 0) then
@@ -184,11 +270,7 @@ function EngineControl()
     end
 end
 
-RegisterCommand('offmotor', function ()
-    EngineControl()
-end)
-
-RegisterCommand('belt', function ()
+function BeltControl()
     local jugador = PlayerPedId()
     if IsPedInAnyVehicle(jugador) then
         if cinturon then 
@@ -201,11 +283,65 @@ RegisterCommand('belt', function ()
             Cinturon(jugador)
         end
     end
+end
+
+RegisterCommand(Config.CommandHideAllHUD, function()
+    SendNUIMessage({action = 'hideAllHud'})
 end)
 
+RegisterCommand(Config.CommandShowAllHUD, function()
+    SendNUIMessage({ action = 'ShowAllHud' })
+end)
+
+RegisterCommand('offmotor', function ()
+    EngineControl()
+end)
+
+RegisterCommand('belt', function ()
+    BeltControl()
+end)
 
 RegisterKeyMapping('belt', 'Car Belt', 'keyboard', Config.BeltKey)
 RegisterKeyMapping('offmotor', 'Turn ON/OFF the car', 'keyboard', Config.ONandOFFMotorKey)
 
+CreateThread(function()
+    while true do
+        local ped = PlayerPedId()
+        local player = PlayerId()
+            if IsPauseMenuActive() and not isPaused then
+                isPaused = true
+                SendNUIMessage({action = 'hideAllHud'})
+            elseif not IsPauseMenuActive() and isPaused then
+                isPaused = false
+                SendNUIMessage({action = 'ShowAllHud'})
+            end
+        Wait(500)
+    end
+end)
 
+-- MIC
 
+Citizen.CreateThread(function() 
+    
+    local talking = false
+    local playerId = PlayerId()
+
+    while true do
+        Wait(300)
+            if NetworkIsPlayerTalking(PlayerId()) then
+                SendNUIMessage({talking = true})
+                else 
+                SendNUIMessage({talking = false})
+            end	
+    end
+end)
+
+RegisterNetEvent('Ultra-Hud:Hideall')
+AddEventHandler('Ultra:Hideall', function(players)
+	SendNUIMessage({action = 'hideAllHud'})
+end)
+
+RegisterNetEvent('Ultra:showhudall')
+AddEventHandler('Ultra:showhudall', function(players)
+	SendNUIMessage({ action = 'ShowAllHud' })
+end)

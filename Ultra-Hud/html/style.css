@@ -40,7 +40,13 @@ body {
     border-right: .3vw #4a36ff solid;
     padding: .2vw;
 }
-  
+
+.logoposition {
+    position: absolute;
+    top: .5vw;
+    right: 1vw;
+}
+
 .datap {
     padding: .2vw;
 }
