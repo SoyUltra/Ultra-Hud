@@ -1,4 +1,5 @@
 # Ultra-Hud
+!! Now Supports QTCORE
 
 English
 
@@ -9,7 +10,7 @@ Español
 Logre hacer mi primer script. espero seguir aprendiendo mas. este recurso es totalmente gratis, espero que disfruten de lo que voy a presentarles.
 
 Fivem HUD FREE 
-FRAMEWORK: ESX  
+FRAMEWORK: ESX & QBCORE
 
 - STATUS HUD 
 - CAR HUD 
