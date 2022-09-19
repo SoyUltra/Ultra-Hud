@@ -2,9 +2,9 @@
 fx_version 'cerulean'
 game 'gta5'
 
-author 'Clau#1981'
+author 'Clau#1981 / DISCORD = https://discord.io/ultracode' 
 
-description 'Ultra HUD'
+description 'Ultra HUD 1.2'
 
 client_scripts {
     'Client/*.lua',
