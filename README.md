@@ -1,5 +1,5 @@
 # Ultra-Hud
-!! Now Supports QTCORE
+!! Now Supports QBCORE
 
 English
 
